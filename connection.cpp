@@ -77,8 +77,7 @@ void Connection::processReadyRead()
             return;
         }
 
-        username = QString(buffer) + '@' + peerAddress().toString() + ':'
-                   + QString::number(peerPort());
+        username = QString(buffer);
         currentDataType = Undefined;
         numBytesForCurrentDataType = 0;
         buffer.clear();

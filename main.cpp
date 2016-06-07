@@ -1,6 +1,7 @@
 #include <QApplication>
 
 #include "chatdialog.h"
+#include "username.h"
 
 #include <QtCore/QSettings>
 #include <QtNetwork/QNetworkConfigurationManager>
@@ -47,7 +48,12 @@ int main(int argc, char *argv[])
         }
     }
 
-    ChatDialog dialog;
-    dialog.show();
+    username Udialog;
+        if (Udialog.exec() == QDialog::Rejected) return 0;
+       QString un = Udialog.getUserName();
+
+    ChatDialog dialog(Udialog.getUserName());
+        dialog.show();
     return app.exec();
+
 }

@@ -4,9 +4,9 @@
 #include "connection.h"
 #include "peermanager.h"
 
-Client::Client()
+Client::Client(QString userName)
 {
-    peerManager = new PeerManager(this);
+    peerManager = new PeerManager(userName, this);
     peerManager->setServerPort(server.serverPort());
     peerManager->startBroadcasting();
 
@@ -28,8 +28,7 @@ void Client::sendMessage(const QString &message)
 
 QString Client::nickName() const
 {
-    return QString(peerManager->userName()) + '@' + QHostInfo::localHostName()
-           + ':' + QString::number(server.serverPort());
+    return QString(peerManager->userName());
 }
 
 bool Client::hasConnection(const QHostAddress &senderIp, int senderPort) const
@@ -81,7 +80,7 @@ void Client::disconnected()
         removeConnection(connection);
 }
 
-void Client::connectionError(QAbstractSocket::SocketError /* socketError */)
+void Client::connectionError(QAbstractSocket::SocketError /* ошибка сокета */)
 {
     if (Connection *connection = qobject_cast<Connection *>(sender()))
         removeConnection(connection);

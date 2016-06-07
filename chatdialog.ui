@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Chat</string>
+   <string>Чат</string>
   </property>
   <layout class="QVBoxLayout">
    <property name="spacing">
@@ -58,6 +58,9 @@
      </item>
      <item>
       <widget class="QListWidget" name="listWidget">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="maximumSize">
         <size>
          <width>180</width>

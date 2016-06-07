@@ -2,8 +2,9 @@
 
 #include "chatdialog.h"
 
-ChatDialog::ChatDialog(QWidget *parent)
-    : QDialog(parent)
+
+ChatDialog::ChatDialog(QString userName, QWidget *parent)
+    : QDialog(parent), client(userName)
 {
     setupUi(this);
 
@@ -50,7 +51,7 @@ void ChatDialog::returnPressed()
     if (text.startsWith(QChar('/'))) {
         QColor color = textEdit->textColor();
         textEdit->setTextColor(Qt::red);
-        textEdit->append(tr("! Unknown command: %1")
+        textEdit->append(tr("! Неизвестная команда: %1")
                          .arg(text.left(text.indexOf(' '))));
         textEdit->setTextColor(color);
     } else {

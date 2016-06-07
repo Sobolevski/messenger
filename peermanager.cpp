@@ -7,26 +7,11 @@
 static const qint32 BroadcastInterval = 2000;
 static const unsigned broadcastPort = 45000;
 
-PeerManager::PeerManager(Client *client)
+PeerManager::PeerManager(QString userName, Client *client)
     : QObject(client)
 {
     this->client = client;
-
-    QStringList envVariables;
-    envVariables << "USERNAME.*" << "USER.*" << "USERDOMAIN.*"
-                 << "HOSTNAME.*" << "DOMAINNAME.*";
-
-    QStringList environment = QProcess::systemEnvironment();
-    foreach (QString string, envVariables) {
-        int index = environment.indexOf(QRegExp(string));
-        if (index != -1) {
-            QStringList stringList = environment.at(index).split('=');
-            if (stringList.size() == 2) {
-                username = stringList.at(1).toUtf8();
-                break;
-            }
-        }
-    }
+    this->username = userName.toUtf8();
 
     if (username.isEmpty())
         username = "unknown";
